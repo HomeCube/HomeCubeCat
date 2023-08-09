@@ -2,7 +2,6 @@ import openai
 from typing import List
 from langchain import PromptTemplate
 
-from cat.looking_glass.ws_logger import ws_logger
 
 api_key = ""
 
@@ -58,6 +57,7 @@ class LLMTransaction:
     def predict(self, query, **kwargs) -> str:
         prompt = self.format(query, **kwargs)
         messages = [{"role": "user", "content": prompt}]
+        print(messages)
         output = openai.ChatCompletion.create(model = self.model, messages = messages)
         return output.choices[0].message.content
     
@@ -65,10 +65,16 @@ class ChatHistory():
     history: List[dict] = []
     
     def get(self, i: int) -> dict:
-        return self.history[i]
-
+        try:
+            return self.history[i]
+        except:
+            return None
+        
     def get_content(self, i: int) -> str:
-        return self.get(i)["content"]
+        try:
+            return self.get(i)["content"]
+        except:
+            return None
 
     def add_user_msg(self, msg: str) -> None:
         self.history.append({"role": "user", "content": msg})
@@ -134,7 +140,7 @@ class LLMConversation:
 
     def predict(self, input: str):
         self.messages.append({"role": "user", "content": input})
-        output = openai.ChatCompletion.create(model = self.model, messages = self.messages)
+        output = openai.ChatCompletion.create(model = self.model, messages = self.messages, temperature = 0.6)
         self.messages.append(output.choices[0].message)
         return output.choices[0].message.content
 
