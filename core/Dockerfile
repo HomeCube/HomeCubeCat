@@ -27,7 +27,8 @@ RUN pip install -U pip && \
     pip install --upgrade requests &&\
     pip install --force-reinstall urllib3==1.26.16 &&\
     pip install asyncio &&\
-    pip install nest_asyncio
+    pip install nest_asyncio &&\
+    pip install spotipy
 
 ### FINISH ###
 # ready to go (docker-compose up)
