@@ -3,7 +3,7 @@ from typing import List
 from langchain import PromptTemplate
 
 
-api_key = ""
+api_key = "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"
 
 # Shot is a class for prompt examples (few-shots learning)
 class Shot:

@@ -8,7 +8,7 @@ from fastapi.concurrency import run_in_threadpool
 
 from typing import Callable, Coroutine
 
-from cat.looking_glass.ws_logger import ws_logger
+# from cat.looking_glass.ws_logger import ws_logger
 from cat.looking_glass.utils import gen_response
 
 import asyncio
